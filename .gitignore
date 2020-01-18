@@ -1,3 +1,7 @@
+# Custom
+configs.ts
+production
+
 # Logs
 logs
 *.log

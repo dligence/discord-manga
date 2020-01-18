@@ -1,0 +1,26 @@
+{
+  "name": "discord-manga",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc && node production/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skillz4Killz/discord-manga.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Skillz4Killz/discord-manga/issues"
+  },
+  "homepage": "https://github.com/Skillz4Killz/discord-manga#readme",
+  "dependencies": {
+    "@types/node": "^13.1.8",
+    "eris": "^0.11.2",
+    "patron": "github:LJNeon/patron#dev",
+    "typescript": "^3.7.5"
+  }
+}
