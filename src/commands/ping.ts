@@ -14,4 +14,4 @@ class Ping extends Command {
   }
 }
 
-export default new Ping()
+module.exports = new Ping()
