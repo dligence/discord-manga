@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node production/index.js"
+    "dev": "tsc && node production/index.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
