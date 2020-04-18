@@ -1,34 +1,27 @@
 import configs from './configs'
 import { Client } from 'eris'
-import { Registry, Handler, ResultType } from 'patron'
+import { Registry, Handler } from 'patron'
 import path from 'path'
 import { Message } from 'eris'
+import nodefetch from 'node-fetch'
 
-const registry = new Registry({ defaultReaders: true }).registerCommands(path.join(__dirname, 'commands/')).registerPrefixes([','])
+const registry = new Registry({ defaultReaders: true })
+  .registerCommands(path.join(__dirname, 'commands/'))
+  .registerPrefixes([','])
 
 const handler = new Handler({ registry })
 const BotClient = new Client(configs.token)
-console.log('before connect')
+
 BotClient.connect()
-console.log('after connect')
-BotClient.on('ready', () => '[READY] Bot is ready!')
+
+BotClient.on('ready', async () => {
+  const buffer = await nodefetch('https://i.imgur.com/Bum3Xkh.png').then(res => res.buffer())
+  const test = await BotClient.editSelf({ avatar: buffer. })
+  console.log(test)
+  console.log('[READY] Bot is ready!')
+})
   .on('messageCreate', async message => {
-    console.log('message createds')
-    const commandResult = await handler.run(message)
-
-    if (commandResult.type === ResultType.ArgumentCount) {
-      message.content = '.ping'
-      handler.run(message)
-    }
-
-    console.log(commandResult)
-
-    if (commandResult.type === ResultType.Precondition) {
-      console.log('precondition failed', commandResult)
-    }
-  })
-  .on('messageDelete', message => {
-    console.log(message)
+    handler.run(message)
   })
   .on('messageReactionAdd', async (message, emoji, userID) => {
     if (userID === BotClient.user.id) return
@@ -66,7 +59,7 @@ BotClient.on('ready', () => '[READY] Bot is ready!')
         // Go to last chapter
         handler.executeCommand(messageToUse, command, [manga, `${chapter} - 1`, '1'])
       } else {
-        handler.executeCommand(messageToUse, command, [manga, `${chapter}`, `${page + 1}`])
+        handler.executeCommand(messageToUse, command, [manga, `${chapter}`, `${page - 1}`])
       }
     }
   })
