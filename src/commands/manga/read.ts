@@ -56,9 +56,12 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
 
   const response = await message.channel.createMessage({
     embed: {
-      title: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${
-        args.page === maxPages ? 'Last' : args.page
-      }`,
+      author: {
+        name: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${
+          args.page === maxPages ? 'Last' : args.page
+        }`,
+        icon_url: message.member?.guild.shard.client.user.avatarURL
+      },
       image: { url },
       footer: { text: `Powered By MangaPanda` }
     }
