@@ -3,7 +3,6 @@ import { Client } from 'eris'
 import { Registry, Handler } from 'patron'
 import path from 'path'
 import { Message } from 'eris'
-import nodefetch from 'node-fetch'
 
 const registry = new Registry({ defaultReaders: true })
   .registerCommands(path.join(__dirname, 'commands/'))
