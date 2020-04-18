@@ -1,4 +1,4 @@
-import { Command } from 'patron'
+import { Command, Context } from 'patron'
 import nodefetch from 'node-fetch'
 
 interface ReadCommandArgs {
@@ -10,6 +10,7 @@ interface ReadCommandArgs {
 const ReadCommand = new Command({
   names: ['read'],
   description: 'time to read manga',
+  usableContexts: [Context.DM, Context.Guild],
   arguments: [
     {
       example: '5',

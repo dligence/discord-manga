@@ -1,4 +1,4 @@
-import { Command } from 'patron'
+import { Command, Context } from 'patron'
 import nodefetch from 'node-fetch'
 
 interface OnepieceCommandArgs {
@@ -9,6 +9,7 @@ interface OnepieceCommandArgs {
 const OnepieceCommand = new Command({
   names: ['onepiece'],
   description: 'time to read One Piece',
+  usableContexts: [Context.DM, Context.Guild],
   arguments: [
     {
       defaultValue: 1,

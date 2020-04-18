@@ -6,7 +6,7 @@ class Ping extends Command {
     super({
       names: ['ping', 'pong'],
       description: 'is the bot alive?',
-      usableContexts: [Context.Guild]
+      usableContexts: [Context.Guild, Context.DM]
     })
   }
 
