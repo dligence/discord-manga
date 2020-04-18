@@ -15,9 +15,6 @@ const BotClient = new Client(configs.token)
 BotClient.connect()
 
 BotClient.on('ready', async () => {
-  const buffer = await nodefetch('https://i.imgur.com/Bum3Xkh.png').then(res => res.buffer())
-  const test = await BotClient.editSelf({ avatar: buffer. })
-  console.log(test)
   console.log('[READY] Bot is ready!')
 })
   .on('messageCreate', async message => {
