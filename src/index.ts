@@ -4,15 +4,16 @@ import { Registry, Handler, ResultType } from 'patron'
 import path from 'path'
 import { Message } from 'eris'
 
-const registry = new Registry({ defaultReaders: true }).registerCommands(path.join(__dirname, 'commands/'))
+const registry = new Registry({ defaultReaders: true }).registerCommands(path.join(__dirname, 'commands/')).registerPrefixes([','])
 
 const handler = new Handler({ registry })
 const BotClient = new Client(configs.token)
-
+console.log('before connect')
 BotClient.connect()
-
+console.log('after connect')
 BotClient.on('ready', () => '[READY] Bot is ready!')
   .on('messageCreate', async message => {
+    console.log('message createds')
     const commandResult = await handler.run(message)
 
     if (commandResult.type === ResultType.ArgumentCount) {

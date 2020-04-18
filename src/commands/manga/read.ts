@@ -36,7 +36,8 @@ const ReadCommand = new Command({
 
 ReadCommand.run = async (message, args: ReadCommandArgs) => {
   const data = await nodefetch(`https://www.mangapanda.com/${args.manga}/${args.chapter}/${args.page}`).then(res => res.text()).catch(() => undefined)
-	if (!data) return
+  if (!data) return
+  console.log('inside read', data)
 
 	const imgIndex = data.indexOf('id="img"')
 	const imgString = data.substring(imgIndex)
@@ -50,7 +51,7 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
 	const pagesEndIndex = pageStart.indexOf('</div>')
 	const maxPages = Number(pageStart.substring(0, pagesEndIndex))
 
-
+  console.log(url, start)
 	const response = await message.channel.createMessage({ embed: { title: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${args.page === maxPages ? 'Last' : args.page}`, image: { url }, footer: { text: `Powered By MangaPanda` } }})
 
 	if (args.page > 1) await response.addReaction('⬅')
