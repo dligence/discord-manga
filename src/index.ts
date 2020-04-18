@@ -13,11 +13,17 @@ BotClient.connect()
 
 BotClient.on('ready', () => '[READY] Bot is ready!')
   .on('messageCreate', async message => {
-    const commandResult = await handler.run(message, 1)
+    const commandResult = await handler.run(message)
 
     if (commandResult.type === ResultType.ArgumentCount) {
       message.content = '.ping'
-      handler.run(message, 1)
+      handler.run(message)
+    }
+
+    console.log(commandResult)
+
+    if (commandResult.type === ResultType.Precondition) {
+      console.log('precondition failed', commandResult)
     }
   })
   .on('messageDelete', message => {
@@ -56,7 +62,7 @@ BotClient.on('ready', () => '[READY] Bot is ready!')
     } else {
       if (page === 1) {
         if (chapter === 1) return
-        // Go to next chapter
+        // Go to last chapter
         handler.executeCommand(messageToUse, command, [manga, `${chapter} - 1`, '1'])
       } else {
         handler.executeCommand(messageToUse, command, [manga, `${chapter}`, `${page + 1}`])
