@@ -61,7 +61,7 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
   const response = await message.channel.createMessage({
     embed: {
       author: {
-        name: message.author.username,
+        name: 'MangaBot',
         icon_url: message.member?.guild.shard.client.user.avatarURL
       },
       title: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${

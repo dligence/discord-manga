@@ -45,7 +45,7 @@ BotClient.on('ready', async () => {
     if (emoji.name === '➡') {
       if (embed.title.endsWith('Last')) {
         // Go to next chapter
-        handler.executeCommand(messageToUse, command, [manga, `${chapter} + 1`, '1'])
+        handler.executeCommand(messageToUse, command, [manga, `${chapter + 1}`, '1'])
       } else {
         handler.executeCommand(messageToUse, command, [manga, `${chapter}`, `${page + 1}`])
       }
@@ -53,7 +53,7 @@ BotClient.on('ready', async () => {
       if (page === 1) {
         if (chapter === 1) return
         // Go to last chapter
-        handler.executeCommand(messageToUse, command, [manga, `${chapter} - 1`, '1'])
+        handler.executeCommand(messageToUse, command, [manga, `${chapter - 1}`, '1'])
       } else {
         handler.executeCommand(messageToUse, command, [manga, `${chapter}`, `${page - 1}`])
       }
