@@ -1,5 +1,6 @@
 import { Command, Context } from 'patron'
 import nodefetch from 'node-fetch'
+import BotClient from '../..'
 
 interface ReadCommandArgs {
   manga: string
@@ -58,22 +59,26 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
   const pagesEndIndex = pageStart.indexOf('</div>')
   const maxPages = Number(pageStart.substring(0, pagesEndIndex))
 
-  const response = await message.channel.createMessage({
-    embed: {
-      author: {
-        name: 'MangaBot',
-        icon_url: message.member?.guild.shard.client.user.avatarURL
-      },
-      title: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${
-        args.page === maxPages ? 'Last' : args.page
-      }`,
-      image: { url },
-      footer: { text: `Powered By MangaPanda` }
-    }
-  })
+  const embed = {
+    author: {
+      name: 'MangaBot',
+      icon_url: message.member?.guild.shard.client.user.avatarURL
+    },
+    title: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${
+      args.page === maxPages ? 'Last' : args.page
+    }`,
+    image: { url },
+    footer: { text: `Powered By MangaPanda` }
+  }
 
-  if (args.page > 1 || args.chapter > 1) await response.addReaction('⬅')
-  response.addReaction('➡')
+  if (message.author.id !== BotClient.user.id) {
+    const response = await message.channel.createMessage({ embed })
+
+    if (args.page > 1 || args.chapter > 1) await response.addReaction('⬅')
+    response.addReaction('➡')
+  } else {
+    message.edit({ embed })
+  }
 }
 
 module.exports = ReadCommand
