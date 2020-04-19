@@ -73,7 +73,7 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
   })
 
   if (args.page > 1) await response.addReaction('⬅')
-  if (args.page + 1 <= maxPages) response.addReaction('➡')
+  response.addReaction('➡')
 }
 
 module.exports = ReadCommand
