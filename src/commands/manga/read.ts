@@ -72,7 +72,7 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
     }
   })
 
-  if (args.page > 1) await response.addReaction('⬅')
+  if (args.page > 1 || args.chapter > 1) await response.addReaction('⬅')
   response.addReaction('➡')
 }
 
