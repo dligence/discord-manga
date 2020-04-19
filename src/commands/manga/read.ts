@@ -41,7 +41,10 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
   )
     .then(res => res.text())
     .catch(() => undefined)
-  if (!data) return
+  if (!data) {
+    message.channel.createMessage(`Did not find any manga that met your search criteria. Please try again.`)
+    return
+  }
 
   const imgIndex = data.indexOf('id="img"')
   const imgString = data.substring(imgIndex)
@@ -58,11 +61,12 @@ ReadCommand.run = async (message, args: ReadCommandArgs) => {
   const response = await message.channel.createMessage({
     embed: {
       author: {
-        name: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${
-          args.page === maxPages ? 'Last' : args.page
-        }`,
+        name: message.author.username,
         icon_url: message.member?.guild.shard.client.user.avatarURL
       },
+      title: `${args.chapter}/${args.page} - ${args.manga}: Chapter ${args.chapter} Page ${
+        args.page === maxPages ? 'Last' : args.page
+      }`,
       image: { url },
       footer: { text: `Powered By MangaPanda` }
     }
