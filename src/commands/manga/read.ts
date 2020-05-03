@@ -36,6 +36,7 @@ const ReadCommand = new Command({
 })
 
 ReadCommand.run = async (message, args: ReadCommandArgs) => {
+  console.log('[READ] Manga Being Read')
   const data = await nodefetch(
     `https://mangapanda.com/${args.manga.toLowerCase().split(' ').join('-')}/${args.chapter}/${args.page}`
   )

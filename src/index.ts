@@ -14,7 +14,7 @@ const BotClient = new Client(configs.token)
 BotClient.connect()
 
 BotClient.on('ready', async () => {
-  console.log('[READY] Bot is ready!')
+  console.log('[READY] Bot is ready!', BotClient.guilds.size, 'Guilds')
 })
   .on('messageCreate', async message => {
     handler.run(message)
