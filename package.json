@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node production/index.js",
-    "build": "tsc"
+    "start": "tsc && node dist/index.js",
+    "dev": "tsc --noEmit --watch"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,6 @@
   },
   "homepage": "https://github.com/Skillz4Killz/discord-manga#readme",
   "dependencies": {
-    "@types/node": "^13.13.0",
-    "@types/node-fetch": "^2.5.6",
-    "eris": "^0.11.2",
-    "node-fetch": "^2.6.0",
-    "patron": "github:LJNeon/patron#dev",
-    "typescript": "^3.8.3"
+    "typescript": "^4.8.4"
   }
 }
